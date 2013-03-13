@@ -15,25 +15,27 @@ Base = declarative_base()
 class CustomBase(Base):
     __abstract__ = True
 
-    def create(self):
+    def create(self, commit=True):
         """
         Single-Function add+commit to create new row.
+        Pass, commit=False, to defer the commit.
         """
         session.add(self)
-        session.commit()
+        if commit: session.commit()
 
-    def remove(self):
+    def remove(self, commit=True):
         """
         Single-Function delete+commit to delete row. 
+        Pass, commit=False, to defer the commit.
         """
         session.delete(self)
-        session.commit()
+        if commit: session.commit()
 
 ### DEFINE TABLES HERE ###
 
 if __name__ == '__main__':
     import sys
 
-    if len(sys.argv) > 0:
+    if len(sys.argv) > 1:
         if sys.argv[1] == 'create_tables':
             Base.metadata.create_all(engine)
