@@ -17,3 +17,14 @@ or
 easy_install sqlalchemy
 easy_install psycopg2
 ```
+
+### Test that it all worked:
+    
+```
+python -i models.py
+
+>>> engine.execute("SELECT 1").scalar()
+1
+```
+If you get the `1` back, you have connected to the db sucessfully!
+
