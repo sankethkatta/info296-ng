@@ -4,8 +4,8 @@
 
 There are two packages:
 
-    1. [SQLAlchemy](http://www.sqlalchemy.org/)
-    2. [psycopg](http://initd.org/psycopg/)
+1. [SQLAlchemy](http://www.sqlalchemy.org/)
+2. [psycopg](http://initd.org/psycopg/)
 
 `easy_install` or `pip` would work to install these:
 
