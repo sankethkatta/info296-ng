@@ -23,8 +23,8 @@ easy_install psycopg2
 ```
 python -i models.py
 
->>> engine.execute("SELECT 1").scalar()
-1
+>>> session.query(Store).count()
+1745L
 ```
-If you get the `1` back, you have connected to the db sucessfully!
+If you get the row count back, you have connected to the db sucessfully!
 
