@@ -63,7 +63,8 @@ class Store(CustomBase):
 class Transaction(CustomBase):
     __tablename__ = 'transaction'
 
-    recipt_lnr = Column(BigInteger, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    recipt_lnr = Column(BigInteger)
     product_lnr = Column(BigInteger)
     time_lnr = Column(BigInteger)
     sales_datetime = Column(DateTime)
