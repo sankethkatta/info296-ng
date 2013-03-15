@@ -4,6 +4,7 @@ defined in models.py
 """
 
 import models, csv, os, sys
+from datetime import datetime
 
 def insert_customer():
     customer_reader = csv.reader(open(os.path.join('data', 'BA007_Kunde.txt'), 'rb'), delimiter='\t')
@@ -71,7 +72,32 @@ def insert_store():
     # Extra commit for ones that got missed in the mod
     models.session.commit()
 
+def insert_transaction():
+    store_reader = csv.reader(open(os.path.join('data', 'hsl_ba003t_uttrekk_mw201303111.txt'), 'rb'), delimiter='\t')
+    store_reader.next() # Skip the header row
+    count = 0
+    for row in store_reader:
+        count += 1
+        sys.stdout.write('Transaction: %s\r' % count)
+        sys.stdout.flush()
+
+        models.Store(recipt_lnr = int(row[0]),
+                     product_lnr = int(row[1]),
+                     time_lnr = int(row[2]),
+                     sales_datetime = datetime.strptime(row[3], '%m/%d/%Y %H:%M:%S'),
+                     store_lnr = int(row[4]),
+                     customer_lnr = int(row[5]),
+                     product_quantity_weight = float(row[6]),
+                     gross_sales = float(row[7])).create(commit=False)
+
+        # Only commit every n objects to speed up insertion
+        if count % 200 == 0: models.session.commit()
+
+    # Extra commit for ones that got missed in the mod
+    models.session.commit()
+
 if __name__ == '__main__':
     # insert_customer()
-    insert_product()
-    insert_store()
+    # insert_product()
+    # insert_store()
+    insert_transaction()

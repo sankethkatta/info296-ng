@@ -3,11 +3,11 @@ Main Models file for the ng_db on EC2.
 This file defines all the Tables and relationships in the database.
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, BigInteger, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, BigInteger, Float, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('postgresql+psycopg2://postgres:info296ng@ec2-50-19-178-30.compute-1.amazonaws.com:5432/ng_db')
+engine = create_engine('postgresql+psycopg2://postgres:info296ng@ec2-54-242-181-222.compute-1.amazonaws.com:5432/ng_db')
 session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
@@ -60,7 +60,23 @@ class Store(CustomBase):
     brand_chain_name = Column(String)
     corporation_id = Column(Integer)
 
+class Transaction(CustomBase):
+    __tablename__ = 'transaction'
+
+    recipt_lnr = Column(Integer, primary_key=True)
+    product_lnr = Column(Integer)
+    time_lnr = Column(Integer)
+    sales_datetime = Column(DateTime)
+    store_lnr = Column(Integer)
+    customer_lnr = Column(Integer)
+    product_quantity_weight = Column(Float)
+    gross_sales = Column(Float)
+
 if __name__ == '__main__':
+    """
+    Commandline action for creating tables in db:
+    python models.py create_tables
+    """
     import sys
 
     if len(sys.argv) > 1:
