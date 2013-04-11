@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NG-Simulator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/flat-ui.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="row-fluid">
+        <div class="span6 offset3">
+          <div id="header">
+            <img src="{{ url_for('static', filename='img/illustrations/clipboard.png') }}" class="big-illustration-pusher">
+            <h1>NG Shopping List Simulator</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span6 offset3" id="lists">
+          {% include 'rec_list.html' %}
+
+          <ul class="pager">
+                <li class="previous">
+                  <a href="#">
+                    <img src="{{ url_for('static', filename='img/pager/previous.png') }}">
+                    Previous List
+                  </a>
+                </li>
+                <!-- <li class="pager-center">Center</li> -->
+                <li class="next">
+                  <a href="#">
+                    Next List
+                    <img src="{{ url_for('static', filename='img/pager/next.png') }}">
+                  </a>
+                </li>
+              </ul>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
