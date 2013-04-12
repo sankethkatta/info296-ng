@@ -1,6 +1,11 @@
-<form method="POST">
+{% if hidden %}
+    <form class="rec-form" method="POST" style="display: none; left: 100%">
+{% else %}
+    <form class="rec-form" method="POST">
+{% endif %}
     <div class="todo">
         <div class="todo-search">
+            <div class="search-label">Customer:</div>
             <input class="todo-search-field" type="text" value="{{ customer_lnr }}" placeholder="customer_lnr" name="customer_lnr">
             <div class="customer-icon fui-man-24"></div>
         </div>

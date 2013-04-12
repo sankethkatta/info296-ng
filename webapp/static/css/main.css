@@ -32,3 +32,62 @@
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
 }
+
+.pagination ul {
+  width: 100%;
+}
+
+.pagination .previous {
+  float: left;
+}
+
+.pagination .previous a:hover {
+  background-color: #2ECC71;
+}
+
+.pagination .next {
+  float: right;
+}
+
+.pagination .next a:hover {
+  background-color: #2ECC71;
+}
+
+#lists {
+  overflow: hidden;
+}
+
+.rec-form {
+  position: relative;
+}
+
+.search-label {
+  color: #34495e;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 23px;
+  padding: 5px 10px 0px 0px;
+  text-indent: 0;
+  float:left;
+}
+
+#pagination-index {
+  text-align: center;
+  position: relative;
+  top: 30px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+#loading {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+#loading img {
+  padding-right: 30px;
+}

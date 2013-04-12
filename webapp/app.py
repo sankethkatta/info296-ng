@@ -16,7 +16,8 @@ def update():
     purchased_list = request.json.get('purchased_list')
     new_list = model_callback(customer_lnr, purchased_list)
     return render_template('rec_list.html', rec_list=new_list,
-                                            customer_lnr=customer_lnr)
+                                            customer_lnr=customer_lnr,
+                                            hidden=True)
 
 def model_callback(customer_lnr, purchased_list=None):
     return ["hello", "bye", "hi"]
