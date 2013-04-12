@@ -10,7 +10,6 @@
 
 #header {
   margin-top: 20px;
-  margin-bottom: 20px;
   height: 100px;
 }
 
@@ -31,6 +30,10 @@
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
+}
+
+.pagination {
+  margin: 0px;
 }
 
 .pagination ul {
@@ -84,7 +87,7 @@
   text-align: center;
   font-weight: 700;
   font-size: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   opacity: 0;
 }
 

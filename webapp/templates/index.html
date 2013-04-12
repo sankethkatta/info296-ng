@@ -19,11 +19,11 @@
             <img src="{{ url_for('static', filename='img/illustrations/clipboard.png') }}" class="big-illustration-pusher">
             <h1>NG Shopping List Simulator</h1>
           </div>
+          <div id="loading"><img src="{{ url_for('static', filename='img/loading.gif') }}"><span>Loading...</span></div>
         </div>
       </div>
 
       <div class="row-fluid">
-        <div id="loading"><img src="{{ url_for('static', filename='img/loading.gif') }}"><span>Loading...</span></div>
         <div class="span6 offset3" id="lists">
           {% include 'rec_list.html' %}
         </div>
