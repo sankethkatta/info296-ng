@@ -16,7 +16,9 @@ slideLeft = function() {
         $(".rec-form:visible").animate({"right": "100%"}, function() {
             $(this).hide();
             $(this).next().show();
-            $(this).next().animate({"left": "0%"});
+            $(this).next().animate({"left": "0%"}, function() {
+                $(this).css("left", "auto");
+            });
         });
         var index = $("#pagination-index span");
         index.html(parseInt(index.html()) + 1);
@@ -28,7 +30,9 @@ slideRight = function() {
         $(".rec-form:visible").animate({"left": "100%"}, function() {
             $(this).hide();
             $(this).prev().show();
-            $(this).prev().animate({"right": "0%"});
+            $(this).prev().animate({"right": "0%"}, function() {
+                $(this).css("right", "auto");
+            });
         });
         var index = $("#pagination-index span");
         index.html(parseInt(index.html()) - 1);
