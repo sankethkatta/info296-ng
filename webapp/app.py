@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 import json
+
 app = Flask(__name__)
 
+# Reccomendation Model
 def model_callback(customer_lnr, purchased_list=None):
     """
     This function is called to generate an ordered list of recommendations.
@@ -11,7 +13,7 @@ def model_callback(customer_lnr, purchased_list=None):
     return ["hello", "bye", "hi"]
 
 
-# HTTP ROUTES
+# HTTP Routes
 @app.route('/<int:customer_lnr>')
 def index(customer_lnr):
     """
