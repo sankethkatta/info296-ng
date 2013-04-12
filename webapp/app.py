@@ -10,7 +10,7 @@ def model_callback(customer_lnr, purchased_list=None):
     If purchased_list == None, there are no updates (i.e. being called on pageload)
     Otherwise, the purchased_list will contain the names of the items bought.
     """
-    return ["hello", "bye", "hi"]
+    return ["Milk", "Cheese", "Bread", "Eggs"]
 
 
 # HTTP Routes
