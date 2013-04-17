@@ -96,3 +96,35 @@
 #loading img {
   padding-right: 30px;
 }
+
+.todo-time-step {
+  background: #2ECC71; 
+  background-size: 16px 16px;
+  color: #34495e;
+  padding: 10px;
+  border-bottom-style: solid;
+  border-bottom: thick, #34495e;
+  border-bottom-width: 2px;
+}
+
+.time-step-input {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin-top: 5px;
+  padding: 10px;
+  border-style: none;
+  color: #34495e;
+  width: 300px;
+}
+
+.time-step-field {
+  color: #34495e;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 23px;
+  padding: 5px 10px 0px 0px;
+  text-indent: 0;
+  float:left; 
+}

@@ -19,6 +19,10 @@
             {% endfor %}
         </ul>
     </div>
-    <input class="prev_rec_list" type="hidden" value="{{ prev_rec_list }}">
+    <input class="state_data" type="hidden" value="{{ state_data }}">
+    <div class="todo-time-step">
+      <div class="time-step-field">Time Step:</div>
+      <input class="time-step-input" type="number" placeholder="How many days since your last purchase?">
+    </div>
     <input class="purchase-btn btn btn-success btn-block btn-large" type="submit" value="Purchase">
 </form>

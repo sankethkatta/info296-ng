@@ -47,7 +47,8 @@ $(document).ready(function() {
             var payload = {purchased_list: []};
             payload.customer_lnr = $(this).find(".todo-search-field").val()           
             payload.prev_rec_list = $(this).find(".prev_rec_list").val();
- 
+            
+            
             $(this).find(".todo-done").each(function() {
                 payload.purchased_list.push($(this).data("name"))
             });
