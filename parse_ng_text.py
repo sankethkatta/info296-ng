@@ -1,65 +1,63 @@
-f = open('hsl_ba003t_uttrekk_mw201303111.txt','r')
-line = f.readline()
+import datetime
+import numpy
+
+
+groups = open('groups.csv','r')
+inverted_index = {}
+name_lookup = {}
+USER = '5955861'
+CONFIDENCE_THRESH = 5
+
+gline = groups.readline()
+gline = groups.readline()
+
+while gline != "":
+	comps = gline.split(';')
+	inverted_index[comps[0]] = comps[1]
+	name_lookup[comps[1]] = comps[2].strip().strip('"')
+	gline = groups.readline()
+
+transactions = open('hsl_ba003t_uttrekk_mw201303111.txt','r')
+tline = transactions.readline()
+tline = transactions.readline()
+
+transaction_table = {}
 count = 1
-counts = {}
-data = []
-dates1 = set()
-dates2 = []
-
-while line != "":  	
-	line = f.readline()
-	comps = line.split()
-	#print line
-	try:
-		#if comps[6] == '5955861' and comps[1] != '57230':
-		#	print line
-			
-		if comps[6] == '5955861' and comps[1] == '15706': #LETTMELK 1L Q, 57394 OST MATLAGINGSOST, yogurt,grapes,detergent,pepsi
-			print line
-			dates2.append((long(comps[2]),float(comps[7])))
-		
-		if comps[6] == '5955861':
-			dates1.add(long(comps[2]))
-			#data.append((long(comps[2]),line))
-
-		if count % 1000000 == 0:
-			print count, len(dates1), len(dates2)
-		
-	except IndexError:
-		break
-	
-	count = count + 1
-
-import scipy.io
-dates1 = list(dates1)
-dates3 = [0.0]*len(dates1)
-for i in dates2:
-	dates3[dates1.index(i[0])] = i[1]
-
-scipy.io.savemat('out2.mat', mdict={'visits2':dates3})
-	
-"""
-	if counts.has_key(comps[6]):
-		counts[comps[6]] = counts[comps[6]] + 1
-	else:
-		counts[comps[6]] = 1
+while tline != "":
+	comps = tline.split() 
+	if comps[6] == USER and inverted_index.has_key(comps[1]):
+		transaction_tuple = (datetime.datetime.strptime(comps[3],"%m/%d/%Y"),float(comps[7]),name_lookup[inverted_index[comps[1]]])
+		group = inverted_index[comps[1]]
+		if not transaction_table.has_key(group):
+			transaction_table[group] = []
+		transaction_table[group].append(transaction_tuple)
 	
 	if count % 1000000 == 0:
-		print count
+		print str((count/92000000.0)*100)+"% Complete"
+				
 	count = count + 1
+	tline = transactions.readline()
 
-counts_list = []
-for i in counts:
-	counts_list.append((counts[i],i))
-
-counts_list.sort(reverse=True)
-
-hist = [ c[0] for c in counts_list]
-names = [ c[1] for c in counts_list]
-
-import scipy.io
-print counts_list[:10]
-print counts_list[len(counts_list)/4]
-
-scipy.io.savemat('out.mat', mdict={'products':hist,'names':names})
-"""
+transition_models = []
+for group in transaction_table:
+	transaction_table[group].sort()
+	normalized_date_quantities = []
+	tally = 0
+	for i in range(1,len(transaction_table[group])):
+		if (transaction_table[group][i][0]-transaction_table[group][i-1][0]).days == 0:
+			tally = tally + transaction_table[group][i-1][1]
+		else:
+			tally = transaction_table[group][i-1][1]
+			normalized_date_quantities.append((transaction_table[group][i][0]-transaction_table[group][i-1][0]).days/tally)
+	if len(normalized_date_quantities) > CONFIDENCE_THRESH:
+		mean = numpy.mean(normalized_date_quantities)
+		std = numpy.std(normalized_date_quantities)
+		outliers = []
+		for i in range(0,len(normalized_date_quantities)):
+			if abs(normalized_date_quantities[i] - mean) > 2*std:
+				outliers.append(i)
+		normalized_date_quantities = [i for j, i in enumerate(normalized_date_quantities) if j not in outliers]
+		transition_models.append((numpy.std(normalized_date_quantities),numpy.mean(normalized_date_quantities),group,transaction_table[group][0][2]))
+transition_models.sort()
+for t in transition_models:
+	print t[3],t[2],t[1],t[0]
