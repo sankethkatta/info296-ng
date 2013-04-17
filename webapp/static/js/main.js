@@ -45,10 +45,13 @@ $(document).ready(function() {
         e.preventDefault();
         if (!($(this).find(".purchase-btn").hasClass("disabled"))) {
             var payload = {purchased_list: []};
-            payload.customer_lnr = $(this).find(".todo-search-field").val()
+            payload.customer_lnr = $(this).find(".todo-search-field").val()           
+            payload.prev_rec_list = $(this).find(".prev_rec_list").val();
+ 
             $(this).find(".todo-done").each(function() {
                 payload.purchased_list.push($(this).data("name"))
             });
+            
             $(this).find(".purchase-btn").val("PURCHASED");
             $(this).find(".purchase-btn").addClass("disabled");
             update(JSON.stringify(payload));

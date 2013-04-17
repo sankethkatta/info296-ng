@@ -10,7 +10,7 @@
             <div class="customer-icon fui-man-24"></div>
         </div>
         <ul class="reccomendation-list">
-            {% for item in rec_list %}
+            {% for (item, freq) in rec_list %}
                 <li class="recommendation-item" data-name="{{ item }}">
                     <div class="todo-content">
                       <h4 class="todo-name"><strong>{{ item }}</strong></h4>
@@ -19,5 +19,6 @@
             {% endfor %}
         </ul>
     </div>
+    <input class="prev_rec_list" type="hidden" value="{{ rec_list }}">
     <input class="purchase-btn btn btn-success btn-block btn-large" type="submit" value="Purchase">
 </form>
