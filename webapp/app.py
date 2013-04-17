@@ -42,6 +42,7 @@ def update():
     prev_rec_list = request.json.get('prev_rec_list')
     customer_lnr = request.json.get('customer_lnr')
     purchased_list = request.json.get('purchased_list')
+    time_step = request.json.get('time_step_since_last_purchase')
     
     new_list = model_callback(customer_lnr, prev_rec_list, purchased_list)
     
