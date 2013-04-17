@@ -49,8 +49,9 @@ def update():
     state_data = request.json.get('state_data')
     customer_lnr = request.json.get('customer_lnr')
     purchased_list = request.json.get('purchased_list')
-
-    new_list, state_data = model_callback(customer_lnr, state_data, purchased_list)
+    days_since_last = request.json.get('time_step_since_last_purchase')
+    
+    new_list, state_data = model_callback(customer_lnr, state_data, purchased_list, days_since_last=days_since_last)
 
     return render_template('rec_list.html', rec_list=new_list,
                                             state_data=json.dumps(state_data),
