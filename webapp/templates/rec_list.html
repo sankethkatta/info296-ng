@@ -6,7 +6,7 @@
     <div class="todo">
         <div class="todo-search">
             <div class="search-label">Customer:</div>
-            <input class="todo-search-field" type="text" value="{{ customer_lnr }}" placeholder="customer_lnr" name="customer_lnr" disabled="disabled">
+            <input class="todo-search-field" type="text" value="{{ customer_lnr }}" placeholder="customer_lnr" name="customer_lnr" >
             <div class="customer-icon fui-man-24"></div>
         </div>
         <ul class="reccomendation-list">
@@ -20,5 +20,9 @@
         </ul>
     </div>
     <input class="prev_rec_list" type="hidden" value="{{ rec_list }}">
+    <div class="todo-time-step">
+      <div class="time-step-field">Time Step</div>
+      <input class="time-step-input"type-"text" placeholder="How many days since your last purchase?">
+    </div>
     <input class="purchase-btn btn btn-success btn-block btn-large" type="submit" value="Purchase">
 </form>
