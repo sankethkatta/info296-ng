@@ -1,10 +1,29 @@
 from flask import Flask, render_template, request
 import json
 import datetime
-from scipy import stats
-
+#from scipy import stats
+import shelve
+import csv
 
 app = Flask(__name__)
+
+purchase_ranking = shelve.open("purchase_ranking")
+INITIAL_TIME = 0
+INITIAL_PRODUCT_QUANTITY = 0
+INITIAL_RANK = 0
+
+for row in csv.reader(open("static/data/frequencies.csv", "r"), delimiter=" "):
+    (product_key, product_number, product_mean, product_std) = row[0], row[1], row[2], row[3]
+    purchase_ranking[product_key] = {"time_since_last_step": INITIAL_TIME, "product_mean": product_mean, "prodcut_std": product_std, "product_quantity": INITIAL_PRODUCT_QUANTITY, "rank": INITIAL_RANK}
+
+purchase_ranking.sync()
+
+print purchase_ranking
+
+
+
+
+
 
 # Reccomendation Model
 def model_callback(customer_lnr, state_data=None, purchased_list=None, days_since_last=0):
@@ -14,18 +33,34 @@ def model_callback(customer_lnr, state_data=None, purchased_list=None, days_sinc
     Otherwise, the purchased_list will contain the names of the items bought.
     """
     if purchased_list == None:
-        new_list = [("Milk", 0), ("Cheese", 0), ("Bread", 0), ("Eggs", 0)]
+        
+        # initially sort the purchase_ranking dictionary by key
+        sorted_product_key = sorted(purchase_ranking, key = lambda key: key)
+        
+        
+        #new_list = [("Milk", 0), ("Cheese", 0), ("Bread", 0), ("Eggs", 0)]
         state_data = {"mean": 0, "stdev": 0, "count": 0}
-        return new_list, state_data
+        
+        return sorted_product_key, state_data
+        
 
     else:
         # state_data['mean'] += state_data['mean'] / float(state_data['count'])
         # state_data['count'] += 1
         # stats.norm.cdf(x, state_data.get['mean'], state_data.get['stdev'])
 
-        new_list = [("Milk", 0), ("Cheese", 0), ("Bread", 0), ("Eggs", 0)]
+        # on update, the value of each product is the frequency/probability, sort the list by value
+        sorted_product_key = sorted(purchase_ranking, key = lambda key: purchase_ranking[key]["rank"])
+        
+
+
+        # store the updated purchase_ranking back to the persistent state
+        purchase_ranking.sync()
+
+        #new_list = [("Milk", 0), ("Cheese", 0), ("Bread", 0), ("Eggs", 0)]
         state_data = {"mean": 0, "stdev": 0, "count": 0}
-        return new_list, state_data
+        
+        return sorted_product_key, state_data
 
 
 # HTTP Routes
