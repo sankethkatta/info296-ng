@@ -85,6 +85,10 @@
   margin: 0 auto;
 }
 
+.pagination {
+    margin-bottom: 20px;
+}
+
 #loading {
   text-align: center;
   font-weight: 700;

@@ -73,7 +73,7 @@ def insert_store():
     models.session.commit()
 
 def insert_transaction():
-    transaction_reader = csv.reader(open(os.path.join('data', 'hsl_ba003t_uttrekk_mw201303111.txt'), 'rb'), delimiter='\t')
+    transaction_reader = csv.reader(open(os.path.join('data', 'hsl.txt'), 'rb'), delimiter='\t')
     transaction_reader.next() # Skip the header row
     count = 0
     for row in transaction_reader:

@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime, BigInte
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('postgresql+psycopg2://postgres:info296ng@ec2-54-242-181-222.compute-1.amazonaws.com:5432/ng_db')
+engine = create_engine('postgresql+psycopg2://postgres:293798463@localhost:5432/ng_db')
 session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
