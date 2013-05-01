@@ -15,18 +15,25 @@ def give_probability(group, day):
 	std = numpy.std(tommy[group])
 	print "mean: ", mean, " std: ", std
 	mod_norm = []
+	#chopping off the edges
+	#Counter: histogram
 	for i in xrange(len(tommy[group])):
 		if (tommy[group][i] < mean + std) and (tommy[group][i] > mean - std):
-			mod_norm.append(tommy[group][i])	
+			mod_norm.append(tommy[group][i])
+	#rounding the consumption rate values to the nearest integer (day counts)		
 	mod_norm = map(lambda x:round(x),mod_norm)
 	rounded = Counter(mod_norm)
 	rounded = dict(rounded)
 	#rounded = sorted(rounded, key = lambda key:rounded[key])
 	sorted(rounded)
 	print rounded
+	
+	#normalization
 	for key,val in rounded.iteritems():
 		rounded[key] = float(val)/len(mod_norm)
 	distsum = 0	
+	
+	#summing the probabilities
 	for key,val in rounded.iteritems():
 		if key>day:
 			break	
