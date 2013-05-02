@@ -75,7 +75,7 @@
   float:left;
 }
 
-#pagination-index {
+.pagination-index {
   text-align: center;
   position: relative;
   top: 30px;

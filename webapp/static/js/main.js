@@ -20,7 +20,7 @@ slideLeft = function() {
                 $(this).css("left", "auto");
             });
         });
-        var index = $("#pagination-index span");
+        var index = $(".pagination-index span");
         index.html(parseInt(index.html()) + 1);
     }
 };
@@ -34,7 +34,7 @@ slideRight = function() {
                 $(this).css("right", "auto");
             });
         });
-        var index = $("#pagination-index span");
+        var index = $(".pagination-index span");
         index.html(parseInt(index.html()) - 1);
     }
 };
@@ -50,7 +50,7 @@ $(document).ready(function() {
             payload.time_step_since_last_purchase = $(this).find(".time-step-input").val()
 
             $(this).find(".todo-done").each(function() {
-                payload.purchased_list.push($(this).data("name"))
+                payload.purchased_list.push({name: $(this).data("group_id"), quantity: $(this).data("quantity")})
             });
 
             $(this).find(".purchase-btn").val("PURCHASED");
