@@ -46,7 +46,7 @@ def model_callback(customer_lnr, state_data=None, purchased_list=None, days_sinc
                 purchase_dict['rank'] = stats.norm.cdf(float(purchase_dict['time_since_last_step']), (purchase_dict['product_quantity']*purchase_dict['product_mean']), (purchase_dict['product_quantity']*purchase_dict['product_std']))
                 purchase_ranking[product] = purchase_dict
         # store the updated purchase_ranking back to the persistent state
-            print product, purchase_ranking[product]['rank']
+            #print product, purchase_ranking[product]['rank']
         purchase_ranking.sync()
 
         sorted_product_key = sorted(purchase_ranking, key = lambda key: purchase_ranking[key]["rank"], reverse=True)
@@ -77,7 +77,7 @@ def update():
     customer_lnr = request.json.get('customer_lnr')
     purchased_list = request.json.get('purchased_list')
     days_since_last = int(request.json.get('time_step_since_last_purchase'))
-    print days_since_last
+    #print days_since_last
     
 
     new_list, state_data = model_callback(customer_lnr, state_data, purchased_list, days_since_last=days_since_last)

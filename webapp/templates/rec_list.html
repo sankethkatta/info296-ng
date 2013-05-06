@@ -3,6 +3,7 @@
 {% else %}
     <form class="rec-form" method="POST">
 {% endif %}
+
     <div class="todo">
         <div class="todo-search">
             <div class="search-label">Customer:</div>
@@ -13,7 +14,8 @@
             {% for item in rec_list %}
                 <li class="recommendation-item" data-name="{{ item }}">
                     <div class="todo-content">
-                        <h4 class="todo-name"><strong>{{ loop.index }}: {{ item }}</strong></h4>
+                        <h4 class="todo-name todo-name-custom-style"><strong>{{ loop.index }}: {{ item }}</strong></h4>
+                        <input class="quanity-input" type="number" placeholder="Amount" min="0">
                     </div>
                 </li>
             {% endfor %}
@@ -22,7 +24,7 @@
     <input class="state_data" type="hidden" value="{{ state_data }}">
     <div class="todo-time-step">
       <div class="time-step-field">Time Step:</div>
-      <input class="time-step-input" type="number" placeholder="Days until next purchase.">
+      <input class="time-step-input" type="number" placeholder="Days until next purchase." min="0">
     </div>
     <input class="purchase-btn btn btn-success btn-block btn-large" type="submit" value="Purchase">
 </form>
