@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on("click", ".recommendation-item", function(e) {
+    $(document).on("click", ".recommendation-item", function(e) {        
         if ($(this).hasClass("todo-done")) {
             $(this).removeClass("todo-done");
         } else {

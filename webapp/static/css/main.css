@@ -143,6 +143,7 @@
   float:left;
 }
 
+<<<<<<< HEAD
 .todo-name {
     float: left;
 }
@@ -184,3 +185,28 @@
     -moz-border-radius: 100px;
     border-radius: 100px;
 }
+=======
+.quanity-input {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 5px;
+  border-style: none;
+  color: #34495e;
+  width: 70px;
+  margin-top:;
+}
+
+.todo-name-custom-style {
+  float: left;
+  width: 430px;
+  margin-top: 5px;
+}
+
+.recommendation-item {
+  height: 35px;
+}
+
+>>>>>>> 46e74addd27ea0fc5cba5c9f7c30ab056e5831a6
