@@ -1,3 +1,6 @@
+/* Ajax Update function
+ * takes a json payload and POSTs to /update
+ */
 var update = function(payload) {
     $.ajax({
         url: "/update",
@@ -11,6 +14,7 @@ var update = function(payload) {
    });
 };
 
+/* Slides the cards to the left */
 slideLeft = function() {
     if (!($(".rec-form:visible").is(":last-child"))) {
         $(".rec-form:visible").animate({"right": "100%"}, function() {
@@ -25,6 +29,7 @@ slideLeft = function() {
     }
 };
 
+/* Slides the cards to the right */
 slideRight = function() {
     if (!($(".rec-form:visible").is(":first-child"))) {
         $(".rec-form:visible").animate({"left": "100%"}, function() {
@@ -40,7 +45,10 @@ slideRight = function() {
 };
 
 
+/* Following runs on document ready */
 $(document).ready(function() {
+
+    /* On purchase */
     $(document).on("submit", ".rec-form", function(e) {
         e.preventDefault();
         if (!($(this).find(".purchase-btn").hasClass("disabled"))) {
@@ -62,14 +70,28 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on("click", ".recommendation-item", function(e) {        
-        if ($(this).hasClass("todo-done")) {
-            $(this).removeClass("todo-done");
-        } else {
-            $(this).addClass("todo-done");
-        }
+    /* On item click */
+    $(document).on("click", ".add", function(e) {
+       var input = $(this).parents(".quantity").find(".quantity_input") 
+       int_input = parseInt(input.val());
+       input.val(int_input + 1); 
+       $(this).parents(".recommendation-item").addClass("todo-done");
     });
 
+    $(document).on("click", ".sub", function(e) {
+       var input = $(this).parents(".quantity").find(".quantity_input") 
+       int_input = parseInt(input.val());
+       if (int_input > 0) {
+           input.val(int_input - 1); 
+           if (int_input - 1 === 0) {
+              $(this).parents(".recommendation-item").removeClass("todo-done");
+           }
+       } else if (int_input === 0){
+          $(this).parents(".recommendation-item").removeClass("todo-done");
+       }
+    });
+
+    /* Bind arrow clicks to slide functions */
     $(document).on("click", ".previous", function() {
         slideRight();
     });

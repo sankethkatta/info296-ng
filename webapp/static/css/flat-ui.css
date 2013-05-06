@@ -1767,26 +1767,24 @@ textarea,
     margin: 0;
     list-style-type: none; }
   .todo li {
-    background: #34495e; /*url("../img/todo/todo.png") 92% center no-repeat;*/
+    background: #34495e url("../img/todo/todo.png") 92% center no-repeat;
     background-size: 20px 20px;
     cursor: pointer;
     margin-top: 2px;
-    padding: 10px 25px 17px 25px;
+    padding: 18px 42px 17px 25px;
     position: relative;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
     -o-transition: 0.25s;
     transition: 0.25s;
     -webkit-backface-visibility: hidden; }
-    
     .todo li:first-child {
       margin-top: 0; }
     .todo li:last-child {
       border-radius: 0 0 6px 6px;
       padding-bottom: 18px; }
-    
     .todo li.todo-done {
-      background: transparent; /*url("../img/todo/done.png") 92% center no-repeat;*/
+      background: transparent url("../img/todo/done.png") 92% center no-repeat;
       background-size: 20px 20px;
       color: #2ECC71; }
       .todo li.todo-done .todo-name {
@@ -1828,7 +1826,7 @@ input.todo-search-field {
 
 .todo-content {
   padding-top: 1px;
-}
+  overflow: hidden; }
 
 .todo-name {
   color: white;

@@ -14,17 +14,12 @@
             {% for item in rec_list %}
                 <li class="recommendation-item" data-group_id="{{ item.group_id }}">
                     <div class="todo-content">
-<<<<<<< HEAD
                         <h4 class="todo-name"><strong>{{ loop.index }}: {{ item.group_name }}</strong></h4>
                         <div class="quantity">
                             <span class="subadd-wrapper"><span class="sub">-</span></span>
                             <input class="quantity_input" type="text" name="quantity" value="0">
                             <span class="subadd-wrapper"><span class="add">+</span></span>
                         </div>
-=======
-                        <h4 class="todo-name todo-name-custom-style"><strong>{{ loop.index }}: {{ item }}</strong></h4>
-                        <input class="quanity-input" type="number" placeholder="Amount" min="0">
->>>>>>> 46e74addd27ea0fc5cba5c9f7c30ab056e5831a6
                     </div>
                 </li>
             {% endfor %}
