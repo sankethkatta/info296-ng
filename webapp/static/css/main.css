@@ -20,6 +20,18 @@
   border-radius: 8px 8px 0px 0px;
 }
 
+.todo li {
+    background: #34495e center no-repeat;
+    -webkit-transition: 0;
+    -moz-transition: 0;
+    -o-transition: 0;
+    transition: 0;
+}
+
+.todo li.todo-done {
+    background: transparent center no-repeat;
+}
+
 .customer-icon {
   float: right;
   font-size: 24px;
@@ -129,4 +141,46 @@
   padding: 5px 10px 0px 0px;
   text-indent: 0;
   float:left;
+}
+
+.todo-name {
+    float: left;
+}
+
+.quantity {
+    float: right;
+}
+
+.add, .sub {
+    font-weight: bold;
+    font-size: 25px;
+    color: #fbfbfb;
+    display: block;
+    text-align: center;
+}
+
+.quantity .quantity_input {
+    height: 10px;
+    width: 40px;
+    color: #2ECC71;
+    font-weight: bold;
+    font-size: 20px;
+    background: #34495e center no-repeat;
+    border: 0px;
+    text-align: center;
+}
+
+.todo li.todo-done .quantity_input {
+    background-color: #2C3E50;
+}
+
+.subadd-wrapper {
+    display: inline-block;
+    background-color: #27AE60;
+    height: 25px;
+    width: 25px;
+
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
 }

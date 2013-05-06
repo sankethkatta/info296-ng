@@ -44,13 +44,12 @@ $(document).ready(function() {
     $(document).on("submit", ".rec-form", function(e) {
         e.preventDefault();
         if (!($(this).find(".purchase-btn").hasClass("disabled"))) {
-            var payload = {purchased_list: []};
+            var payload = {purchased_items: {}};
             payload.customer_lnr = $(this).find(".todo-search-field").val();
-            payload.prev_rec_list = $(this).find(".prev_rec_list").val();
             payload.time_step_since_last_purchase = $(this).find(".time-step-input").val()
 
             $(this).find(".todo-done").each(function() {
-                payload.purchased_list.push({name: $(this).data("group_id"), quantity: $(this).data("quantity")})
+                payload.purchased_items[$(this).data("group_id")] = {quantity: $(this).data("quantity")}
             });
 
             $(this).find(".purchase-btn").val("PURCHASED");

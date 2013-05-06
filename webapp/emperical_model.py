@@ -64,7 +64,7 @@ def update_rankings(group, time, quantity, purchased=False):
         groups_timestep[group] += time
 
 # namedtuple for easier access to rankings
-Product = namedtuple('Product', ('prob', 'group_id', 'group_name'))
+ProductGroup = namedtuple('ProductGroup', ('prob', 'group_id', 'group_name'))
 groups_timestep = defaultdict(lambda: 0) # for storing timesteps (default value 0 if key does not exist)
 def init_rankings(day_timestep):
     """
@@ -92,7 +92,7 @@ def init_rankings(day_timestep):
 
         tommy[group] = normalized_date_quantities
         prob = give_probability(group, day_timestep)
-        rankings.append(Product(prob, group, lookup(group)))
+        rankings.append(ProductGroup(prob, group, lookup(group)))
 
     rankings.sort(reverse=True)
     return rankings
@@ -103,6 +103,6 @@ def get_rankings(day_timestep):
     returns a descending ranked list of products (namedtuple instances in the following format)
     [product(prob, group_id, group_name), ....]
     """
-    rankings = [Product(give_probability(group, day_timestep), group, lookup(group)) for group in tommy]
+    rankings = [ProductGroup(give_probability(group, day_timestep), group, lookup(group)) for group in tommy]
     rankings.sort(reverse=True)
     return rankings

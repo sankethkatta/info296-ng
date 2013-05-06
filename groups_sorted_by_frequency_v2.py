@@ -19,7 +19,7 @@ while gline != "":
 	name_lookup[comps[1]] = comps[2].strip().strip('"')
 	gline = groups.readline()
 
-transactions = open('hsl_ba003t_uttrekk_mw201303111.txt','r')
+transactions = open('data/hsl_ba003t_uttrekk_mw201303111.txt','r')
 tline = transactions.readline()
 tline = transactions.readline()
 
