@@ -96,10 +96,9 @@
 .pagination-index {
   text-align: center;
   position: relative;
-  top: 30px;
+  color: #ffffff;
   font-weight: 700;
   font-size: 17px;
-  width: 50%;
   margin: 0 auto;
 }
 
@@ -228,4 +227,24 @@
 
 .hero-unit p {
   font-size: 20px;
+}
+
+.btn-previous {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 20px;
+  margin-left: 10px;
+  margin-top: 50%;
+  position: fixed;
+  z-index: 2;
+}
+
+.btn-next {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 20px;
+  margin-top: 50%;
+  margin-left: 94%;
+  position: fixed;
+  z-index: 2;
 }

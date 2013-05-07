@@ -11,13 +11,19 @@
   </head>
 
   <body>
+
+    <button class="btn btn-previous btn-success"><</button>
+    <button class="btn btn-next btn-success">></button>
+    
     <div id="floating-menu">
       <div id="header">
         <img src="{{ url_for('static', filename='img/illustrations/clipboard.png') }}" class="big-illustration-pusher">
         <h1>NG Shopping List Simulator</h1>
+        <div class="pagination-index">List #<span>1</span></div>
       </div>
       <button class="btn btn-block btn-success purchase-btn">Purchase</button>
     </div>
+    
     <div class="container">
 
       <div class="row-fluid">
@@ -27,6 +33,7 @@
       </div>
       
       <div class="row-fluid" id="shopping-content">
+        
         <div class="hero-unit span6">
           <h1> How to Use This Simulator: </h1>
           <p> To begin, add quantities of items you would like to purchase, and then hit purchase.</p>
@@ -34,19 +41,9 @@
         <div class="span5 offset7">
           {% include 'rec_list.html' %}
         </div>
+        
       </div>
-      
-      <div class="row-fluid">
-        <div class="span6 offset3">
-          <div class="pagination">
-            <div class="pagination-index">List #<span>1</span></div>
-            <ul>
-              <li class="previous"><a href="#"><img src="{{ url_for('static', filename='img/pager/previous.png') }}"></a></li>
-              <li class="next"><a href="#"><img src="{{ url_for('static', filename='img/pager/next.png') }}"></a></li>
-            </ul>
-          </div>
-      </div>
-
+  
     </div> <!-- /container -->
 
   </body>

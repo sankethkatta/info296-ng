@@ -8,7 +8,7 @@ var update = function(payload) {
         contentType: "application/json",
         data: payload,
     }).done(function(new_list) {
-        $("#lists").append(new_list);
+        $("#shopping-content").append(new_list);
         slideLeft();
         $("#loading").animate({"opacity": 0});
    });
@@ -16,14 +16,18 @@ var update = function(payload) {
 
 /* Slides the cards to the left */
 slideLeft = function() {
-    if (!($(".rec-form:visible").is(":last-child"))) {
-        $(".rec-form:visible").animate({"right": "100%"}, function() {
+    
+    
+    if (!($("#shopping-content:visible").is(":last-child"))) {
+      
+        $("#shopping-content:visible").animate({"right": "100%"}, function() {
             $(this).hide();
             $(this).next().show();
             $(this).next().animate({"left": "0%"}, function() {
                 $(this).css("left", "auto");
             });
         });
+        
         var index = $(".pagination-index span");
         index.html(parseInt(index.html()) + 1);
     }
@@ -31,8 +35,10 @@ slideLeft = function() {
 
 /* Slides the cards to the right */
 slideRight = function() {
-    if (!($(".rec-form:visible").is(":first-child"))) {
-        $(".rec-form:visible").animate({"left": "100%"}, function() {
+  
+    if (!($("#shopping-content:visible").is(":first-child"))) {
+        $("#shopping-content:visible").animate({"left": "100%"}, function() {
+            
             $(this).hide();
             $(this).prev().show();
             $(this).prev().animate({"right": "0%"}, function() {
@@ -92,11 +98,11 @@ $(document).ready(function() {
     });
 
     /* Bind arrow clicks to slide functions */
-    $(document).on("click", ".previous", function() {
+    $(document).on("click", ".btn-previous", function() {
         slideRight();
     });
 
-    $(document).on("click", ".next", function() {
+    $(document).on("click", ".btn-next", function() {
         slideLeft();
     })
 });
