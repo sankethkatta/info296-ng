@@ -10,7 +10,7 @@
             <input class="todo-search-field" type="text" value="{{ customer_lnr }}" placeholder="customer_lnr" name="customer_lnr" disabled="disabled">
             <div class="customer-icon fui-man-24"></div>
         </div>
-        <ul class="reccomendation-list">
+        <ul class="recommendation-list">
             {% for item in rec_list %}
                 <li class="recommendation-item" data-group_id="{{ item.group_id }}">
                     <div class="todo-content">
@@ -25,8 +25,5 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="todo-time-step">
-      <div class="time-step-field">Time Step:</div>
-      <input class="time-step-input" type="number" placeholder="Days until next purchase." min="0">
-    </div>
+    <div class="round-bottom"></div>
 </form>

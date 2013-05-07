@@ -28,7 +28,7 @@ def give_probability(group, day):
     #chopping off the edges
     #counter: histogram
     for i in xrange(len(tommy[group])):
-        if (tommy[group][i] < mean + std) and (tommy[group][i] > mean - std):
+        if (tommy[group][i] < (mean + std)) and (tommy[group][i] > (mean - std)):
             mod_norm.append(tommy[group][i])
     #rounding the consumption rate values to the nearest integer (day counts)       
     mod_norm = map(lambda x:round(x),mod_norm)
@@ -94,7 +94,7 @@ def init_rankings(day_timestep):
         prob = give_probability(group, day_timestep)
         rankings.append(ProductGroup(prob, group, lookup(group)))
 
-    rankings.sort(reverse=True)
+    rankings.sort(reverse=True, key=lambda x: x.prob)
     return rankings
 
 def get_rankings(day_timestep):
