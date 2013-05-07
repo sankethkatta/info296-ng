@@ -14,43 +14,6 @@ var update = function(payload) {
    });
 };
 
-/* Slides the cards to the left */
-slideLeft = function() {
-    
-    
-    if (!($("#shopping-content:visible").is(":last-child"))) {
-      
-        $("#shopping-content:visible").animate({"right": "100%"}, function() {
-            
-            $(this).hide();
-            $(this).next().show();
-            $(this).next().animate({"left": "0%"}, function() {
-                $(this).css("left", "auto");
-            });
-        });
-        
-        var index = $(".pagination-index span");
-        index.html(parseInt(index.html()) + 1);
-    }
-};
-
-/* Slides the cards to the right */
-slideRight = function() {
-  
-    if (!($("#shopping-content:visible").is(":first-child"))) {
-        $("#shopping-content:visible").animate({"left": "100%"}, function() {
-            
-            $(this).hide();
-            $(this).prev().show();
-            $(this).prev().animate({"right": "0%"}, function() {
-                $(this).css("right", "auto");
-            });
-        });
-        var index = $(".pagination-index span");
-        index.html(parseInt(index.html()) - 1);
-    }
-};
-
 /* The state machine transition
  * there are 3 transitions possible
  * 1 --> 2, 2 --> 3, 3 --> 2
@@ -75,7 +38,7 @@ var twoToThreeTransition = function(dom, e) {
     var thisDom = dom;
     
     $(".pagination-index span").html(parseInt($(".pagination-index span").html()) + 1);
-    $(".step2-help-wrapper").hide();
+    $(".step2-help-wrapper").remove();
     $(".purchase-btn").removeClass("disabled");
     $(".time-step-btn").last().prop('disabled', true);
     $(".time-step-btn").last().addClass("disabled");
@@ -91,8 +54,20 @@ var twoToThreeTransition = function(dom, e) {
     update(JSON.stringify(payload));
 }
 
-var threeToTwoTransition = function() {
+var threeToTwoTransition = function(dom) {
     STATE = 2;
+    var thisDom = dom;
+
+    $(".rec-list-wrapper").last().prev().prev().animate({"right": "100%"}, function() {
+        $(this).hide();
+        $(".time-step-wrapper").last().animate({"right": "100%"}, function() {
+            $(this).hide();
+            $(".purchase-btn").addClass("disabled");
+            $(".rec-list-wrapper").last().removeClass("offset2");
+            $("#shopping-content").append(time_step_template);
+            $("#shopping-content").append(step_2_help_template);
+        });
+    });
 
 }
 
@@ -107,7 +82,7 @@ $(document).ready(function() {
         if (STATE === 1) {
             oneToTwoTransition();
         } else if (STATE === 3) {
-            threeToTwoTransition();
+            threeToTwoTransition(this);
         }
     })
 
