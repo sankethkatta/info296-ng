@@ -26,7 +26,7 @@ def model_callback(customer_lnr, purchased_items=None, days_since_last=0):
         for group in tommy.iterkeys():
             if group in purchased_items:
                 """ if product purchased we update rankings"""
-                update_rankings(group, days_since_last, group['quantity'], purchased=True)
+                update_rankings(group, days_since_last, purchased_items[group], purchased=True)
 
             else:
                 """else we mark purchased as False, so that only days are incremented"""
@@ -50,15 +50,15 @@ def update():
     """
     Called via AJAX with a purchased_items, returns an updated reccomendation list.
     """
-    
+
+
     purchased_items = request.json.get('purchased_items')
     days_since_last = int(request.json.get('time_step_since_last_purchase'))
+    new_list = model_callback(CUSTOMER_LNR, purchased_items, days_since_last=days_since_last)
 
-    new_list = model_callback(, purchased_items, days_since_last=days_since_last)
 
     return render_template('rec_list.html', rec_list=new_list,
-                                            customer_lnr=customer_lnr,
-                                            hidden=True)
+                                            customer_lnr=CUSTOMER_LNR)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

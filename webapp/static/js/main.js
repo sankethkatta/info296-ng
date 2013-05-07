@@ -9,7 +9,7 @@ var update = function(payload) {
         data: payload,
     }).done(function(new_list) {
         $("#shopping-content").append(new_list);
-        
+        $(".rec-list-wrapper").last().addClass("offset2");
         $("#loading").animate({"opacity": 0});
    });
 };
@@ -69,20 +69,22 @@ var oneToTwoTransition = function() {
     });
 }
 
-var twoToThreeTransition = function(this, e) {
+var twoToThreeTransition = function(dom, e) {
     e.preventDefault();
     STATE = 3;
-    var this = this;
+    var thisDom = dom;
     
+    $(".pagination-index span").html(parseInt($(".pagination-index span").html()) + 1);
     $(".step2-help-wrapper").hide();
     $(".purchase-btn").removeClass("disabled");
+    $(".time-step-btn").last().prop('disabled', true);
     $(".time-step-btn").last().addClass("disabled");
     $("#loading").animate({"opacity": 100});
     
     var payload = {purchased_items: {}};
-    payload.time_step_since_last_purchase = $(this).find(".time-step-input").val()
+    payload.time_step_since_last_purchase = $(thisDom).find(".time-step-input").val()
     
-    $(this).find(".todo-done").each(function() {
+    $(thisDom).find(".todo-done").each(function() {
         payload.purchased_items[$(this).data("group_id")] = $(this).find(".quantity_input").val()
     });
     console.log(payload)

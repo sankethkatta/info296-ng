@@ -26,15 +26,15 @@
     
     <div class="container">
 
-      <div class="row-fluid">
+      <div class="row">
         <div class="span6 offset3">
           <div id="loading"><img src="{{ url_for('static', filename='img/loading.gif') }}"><span>Loading...</span></div>
         </div>
       </div>
       
-      <div class="row-fluid" id="shopping-content">
+      <div class="row" id="shopping-content">
 
-        <div id="initial-help" class="hero-unit span7">
+        <div id="initial-help" class="hero-unit span5">
           <h1> How to Use This Simulator: </h1>
           <p> To begin, add quantities of items you would like to purchase, and then hit purchase.</p>
         </div>  
@@ -49,7 +49,7 @@
         {% include 'time_step.html' %}
     </script>
     <script type="text/template" id="step_2_help_template">
-        <div class="span4 offset2 step2-help-wrapper">
+        <div class="span5 offset2 step2-help-wrapper">
             <div class="step-2-help hero-unit">
               <h1> Input Days since Last Purchase </h1>
               <p> To retrieve a new list enter choose a number of days and press "Next List".</p>
