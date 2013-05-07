@@ -21,6 +21,7 @@ slideLeft = function() {
     if (!($("#shopping-content:visible").is(":last-child"))) {
       
         $("#shopping-content:visible").animate({"right": "100%"}, function() {
+            
             $(this).hide();
             $(this).next().show();
             $(this).next().animate({"left": "0%"}, function() {
