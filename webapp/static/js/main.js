@@ -58,8 +58,9 @@ slideRight = function() {
 var transition = function() {
     if (STATE === 1) {
         STATE = 2;
-        /* TRANSITION FROM 1 --> 2 */
-
+        slideLeft()
+        $(this).
+        
     } else if (STATE === 2) {
         STATE = 3;
         /* TRANSITION FROM 2 --> 3 */
@@ -74,7 +75,16 @@ var transition = function() {
 $(document).ready(function() {
 
 var STATE = 1;
-
+  
+    /* NEW on Purchase */
+    $(document).on("click", ".purchase-btn", function(e) {
+      transition()  
+    })
+    
+    
+    
+    
+    
     /* On purchase */
     $(document).on("submit", ".rec-form", function(e) {
         e.preventDefault();

@@ -13,7 +13,7 @@
 }
 
 #header {
-  width: 80%;
+  width: 70%;
   display: block;
   float: left;
   margin-left: 100px;
@@ -107,12 +107,12 @@
 }
 
 .pagination-index {
-  text-align: center;
-  position: relative;
   color: #ffffff;
   font-weight: 700;
-  font-size: 17px;
-  margin: 0 auto;
+  font-size: 20px;
+  float: left;
+  margin-top: 10px;
+  padding-right: 20px;
 }
 
 .pagination {
@@ -217,7 +217,7 @@
   font-weight: bold;
   padding: 20px;
   margin-left: 10px;
-  margin-top: 50%;
+  margin-top: 300px;
   position: fixed;
   z-index: 2;
 }
@@ -226,7 +226,7 @@
   font-size: 35px;
   font-weight: bold;
   padding: 20px;
-  margin-top: 50%;
+  margin-top: 300px;
   margin-left: 94%;
   position: fixed;
   z-index: 2;
