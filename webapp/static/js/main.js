@@ -44,9 +44,29 @@ slideRight = function() {
     }
 };
 
+/* The state machine transition
+ * there are 3 transitions possible
+ * 1 --> 2, 2 --> 3, 3 --> 2
+ */
+var transition = function() {
+    if (STATE === 1) {
+        STATE = 2;
+        /* TRANSITION FROM 1 --> 2 */
+
+    } else if (STATE === 2) {
+        STATE = 3;
+        /* TRANSITION FROM 2 --> 3 */
+
+    } else if (STATE === 3) {
+        STATE = 2;
+        /* TRANSITION FROM 3 --> 2 */
+    }
+}
 
 /* Following runs on document ready */
 $(document).ready(function() {
+
+var STATE = 1;
 
     /* On purchase */
     $(document).on("submit", ".rec-form", function(e) {
