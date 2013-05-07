@@ -111,6 +111,19 @@ var STATE = 1;
        }
     });
 
+    $(document).on("click", ".timeadd", function(e) {
+       var input = $(this).parents(".sub-wrapper").find(".time-step-input") 
+       int_input = parseInt(input.val());
+       input.val(int_input + 1); 
+    });
+
+    $(document).on("click", ".timesub", function(e) {
+       var input = $(this).parents(".sub-wrapper").find(".time-step-input") 
+       int_input = parseInt(input.val());
+       if (int_input > 1) {
+           input.val(int_input - 1); 
+       }
+    });
     /* Bind arrow clicks to slide functions */
     $(document).on("click", ".previous", function() {
         slideRight();
