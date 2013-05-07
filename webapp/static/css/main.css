@@ -216,3 +216,16 @@
 #shopping-content {
   margin-top: 50px;
 }
+
+.hero-unit {
+  position: fixed;
+  z-index: 1;
+}
+
+.hero-unit h1 {
+  font-size: 30px; 
+}
+
+.hero-unit p {
+  font-size: 20px;
+}
