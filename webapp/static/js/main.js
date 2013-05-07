@@ -9,7 +9,6 @@ var update = function(payload) {
         data: payload,
     }).done(function(new_list) {
         $("#shopping-content").append(new_list);
-        slideLeft();
         
         $("#loading").animate({"opacity": 0});
    });
@@ -70,9 +69,10 @@ var oneToTwoTransition = function() {
     });
 }
 
-var twoToThreeTransition = function(e) {
+var twoToThreeTransition = function(this, e) {
     e.preventDefault();
     STATE = 3;
+    var this = this;
     
     $(".step2-help-wrapper").hide();
     $(".purchase-btn").removeClass("disabled");
@@ -81,25 +81,12 @@ var twoToThreeTransition = function(e) {
     
     var payload = {purchased_items: {}};
     payload.time_step_since_last_purchase = $(this).find(".time-step-input").val()
-
+    
     $(this).find(".todo-done").each(function() {
-        payload.purchased_items[$(this).data("group_id")] = {quantity: $(this).data("quantity")}
+        payload.purchased_items[$(this).data("group_id")] = $(this).find(".quantity_input").val()
     });
-
-    $(this).find(".purchase-btn").val("PURCHASED");
-    $(this).find(".purchase-btn").addClass("disabled");
-    $(this).find(".time-step-input").attr("disabled", "disabled");
     console.log(payload)
     update(JSON.stringify(payload));
-
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 var threeToTwoTransition = function() {
@@ -124,40 +111,9 @@ $(document).ready(function() {
 
     $(document).on("submit", ".time-step-form", function(e) {
         if (STATE === 2) {
-            twoToThreeTransition(e);
+            twoToThreeTransition(this, e);
         }
     })
-    
-    
-    
-
-    /* On purchase */
-    $(document).on("submit", ".rec-form", function(e) {
-        e.preventDefault();
-        
-        if (!($(this).find(".purchase-btn").hasClass("disabled"))) {
-            
-            var payload = {purchased_items: {}};
-            payload.customer_lnr = $(this).find(".todo-search-field").val();
-            payload.time_step_since_last_purchase = $(this).find(".time-step-input").val()
-
-            $(this).find(".todo-done").each(function() {
-                payload.purchased_items[$(this).data("group_id")] = {quantity: $(this).data("quantity")}
-            });
-
-            $(this).find(".purchase-btn").val("PURCHASED");
-            $(this).find(".purchase-btn").addClass("disabled");
-            $(this).find(".time-step-input").attr("disabled", "disabled");
-            console.log(payload)
-            update(JSON.stringify(payload));
-
-            $("#loading").animate({"opacity": 100});
-        }
-    });
-
-
-
-
 
     /* On item click */
     $(document).on("click", ".add", function(e) {

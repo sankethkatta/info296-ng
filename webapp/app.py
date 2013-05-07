@@ -50,12 +50,11 @@ def update():
     """
     Called via AJAX with a purchased_items, returns an updated reccomendation list.
     """
-
-    customer_lnr = request.json.get('customer_lnr')
+    
     purchased_items = request.json.get('purchased_items')
     days_since_last = int(request.json.get('time_step_since_last_purchase'))
 
-    new_list = model_callback(customer_lnr, purchased_items, days_since_last=days_since_last)
+    new_list = model_callback(, purchased_items, days_since_last=days_since_last)
 
     return render_template('rec_list.html', rec_list=new_list,
                                             customer_lnr=customer_lnr,
