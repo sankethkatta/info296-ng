@@ -11,30 +11,22 @@
   </head>
 
   <body>
+    <div id="floating-menu">
+      <div id="header">
+        <img src="{{ url_for('static', filename='img/illustrations/clipboard.png') }}" class="big-illustration-pusher">
+        <h1>NG Shopping List Simulator</h1>
+      </div>
+      <button class="btn btn-block btn-success purchase-btn">Purchase</button>
+    </div>
     <div class="container">
 
       <div class="row-fluid">
         <div class="span6 offset3">
-          <div id="header">
-            <img src="{{ url_for('static', filename='img/illustrations/clipboard.png') }}" class="big-illustration-pusher">
-            <h1>NG Shopping List Simulator</h1>
-          </div>
           <div id="loading"><img src="{{ url_for('static', filename='img/loading.gif') }}"><span>Loading...</span></div>
         </div>
       </div>
-
-      <div class="row-fluid">
-        <div class="span6 offset3">
-          <div class="pagination">
-            <div class="pagination-index">List #<span>1</span></div>
-            <ul>
-              <li class="previous"><a href="#"><img src="{{ url_for('static', filename='img/pager/previous.png') }}"></a></li>
-              <li class="next"><a href="#"><img src="{{ url_for('static', filename='img/pager/next.png') }}"></a></li>
-            </ul>
-          </div>
-      </div>
-
-      <div class="row-fluid">
+      
+      <div class="row-fluid" id="shopping-content">
         <div class="span6 offset3" id="lists">
           {% include 'rec_list.html' %}
         </div>
