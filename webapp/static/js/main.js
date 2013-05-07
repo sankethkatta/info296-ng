@@ -55,30 +55,50 @@ slideRight = function() {
  * there are 3 transitions possible
  * 1 --> 2, 2 --> 3, 3 --> 2
  */
-var transition = function() {
-    if (STATE === 1) {
-        STATE = 2;
-        slideLeft()
-        $(this).
+var oneToTwoTransition = function() {
+    STATE = 2;
+    $("#initial-help").animate({"right": "100%"}, function() {
+        var help = this;
         
-    } else if (STATE === 2) {
-        STATE = 3;
-        /* TRANSITION FROM 2 --> 3 */
+        $(this).next().animate({"left": "0%"}, function() {
+            $(help).hide();
+            $("#shopping-content").append(time_step_template);
+            $("#shopping-content").append(step_2_help_template);
+            $(".purchase-btn").addClass("disabled");
+        });
+    });
 
-    } else if (STATE === 3) {
-        STATE = 2;
-        /* TRANSITION FROM 3 --> 2 */
-    }
+}
+
+var twoToThreeTransition = function() {
+    STATE = 3;
+
+}
+
+var threeToTwoTransition = function() {
+    STATE = 2;
+
 }
 
 /* Following runs on document ready */
 $(document).ready(function() {
 
-var STATE = 1;
-  
-    /* NEW on Purchase */
+    STATE = 1;
+    time_step_template = $("#time_step_template").html(); 
+    step_2_help_template = $("#step_2_help_template").html();
+    /* Triggers transitions */
     $(document).on("click", ".purchase-btn", function(e) {
-      transition()  
+        if (STATE === 1) {
+            oneToTwoTransition();
+        } else if (STATE === 3) {
+            threeToTwoTransition();
+        }
+    })
+
+    $(document).on("submit", ".time-step-form", function(e) {
+        if (STATE === 2) {
+            twoToThreeTransition();
+        }
     })
     
     
