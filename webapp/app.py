@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import json, datetime
-from scipy import stats
 from emperical_model import get_rankings, update_rankings, init_rankings, tommy
 import pdb
 
