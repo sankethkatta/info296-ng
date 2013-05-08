@@ -18,7 +18,7 @@ def lookup(id):
     return groups_lookup[str(id)]
 
 tommy = defaultdict(list) # dictionary group ==> list of t/q values
-def give_probability(group, day):
+def give_probability(group, day, quantity):
     """
     returns the probability for a given product group_id and day 
     """
@@ -46,7 +46,7 @@ def give_probability(group, day):
         if key>day:
             break   
         distsum = distsum + val
-    return distsum
+    return distsum / float(quantity + 1)
 
 def update_rankings(group, time, quantity, purchased=False):
     """
@@ -72,6 +72,8 @@ def init_rankings(day_timestep):
     returns a descending ranked list of products (namedtuple instances in the following format)
     [product(prob, group_id, group_name), ....]
     """
+    global tommy
+    tommy = defaultdict(list)
     rankings = []
     for group in transaction_table: 
         transaction_table[group].sort()
@@ -91,18 +93,18 @@ def init_rankings(day_timestep):
                 normalized_date_quantities.append(days/float(quantity))
 
         tommy[group] = normalized_date_quantities
-        prob = give_probability(group, day_timestep)
+        prob = give_probability(group, day_timestep, 1)
         rankings.append(ProductGroup(prob, group, lookup(group)))
 
     rankings.sort(reverse=True, key=lambda x: x.prob)
     return rankings
 
-def get_rankings(day_timestep):
+def get_rankings(day_timestep, quantities):
     """
     Once the inital_rankings has been built, get_rankings can be called to give new rankings
     returns a descending ranked list of products (namedtuple instances in the following format)
     [product(prob, group_id, group_name), ....]
     """
-    rankings = [ProductGroup(give_probability(group, day_timestep), group, lookup(group)) for group in tommy]
+    rankings = [ProductGroup(give_probability(group, day_timestep, quantities.get(group, 0)), group, lookup(group)) for group in tommy]
     rankings.sort(reverse=True)
     return rankings

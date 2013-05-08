@@ -31,7 +31,7 @@ def model_callback(customer_lnr, purchased_items=None, days_since_last=0):
                 """else we mark purchased as False, so that only days are incremented"""
                 update_rankings(group, days_since_last, 0, purchased=False)
 
-        return get_rankings(days_since_last) 
+        return get_rankings(days_since_last, purchased_items) 
 
 # HTTP Routes
 @app.route('/')
