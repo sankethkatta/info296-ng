@@ -16,7 +16,7 @@ def model_callback(customer_lnr, purchased_items=None, days_since_last=0):
     If purchased_items == None, there are no updates (i.e. being called on pageload)
     Otherwise, the purchased_items will contain the names of the items bought.
     """
-    INITAL_DAYS = 5 # Intially there needs to be day timestep
+    INITAL_DAYS = 1 # Intially there needs to be day timestep
 
     if purchased_items == None:
         return init_rankings(INITAL_DAYS)
@@ -52,6 +52,7 @@ def update():
 
 
     purchased_items = request.json.get('purchased_items')
+    print purchased_items
     days_since_last = int(request.json.get('time_step_since_last_purchase'))
     new_list = model_callback(CUSTOMER_LNR, purchased_items, days_since_last=days_since_last)
 

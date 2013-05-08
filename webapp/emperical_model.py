@@ -46,6 +46,7 @@ def give_probability(group, day, quantity):
         if key>day:
             break   
         distsum = distsum + val
+    #print "numerator: %s, denominator: %s" % (distsum, float(quantity + 1))
     return distsum / float(quantity + 1)
 
 def update_rankings(group, time, quantity, purchased=False):
@@ -75,10 +76,12 @@ def init_rankings(day_timestep):
     global tommy
     tommy = defaultdict(list)
     rankings = []
+    last_day_store = max([transaction_table[group][-1][0] for group in transaction_table])
     for group in transaction_table: 
         transaction_table[group].sort()
         normalized_date_quantities = []
         quantity = 0
+
 
         # Runs over transaction_table to create inital t/q values
         for i in range(1,len(transaction_table[group])):
@@ -86,14 +89,13 @@ def init_rankings(day_timestep):
 
             if days == 0:
                 quantity += transaction_table[group][i-1][1]
-                groups_timestep[group] += 0
             else:
                 quantity = transaction_table[group][i-1][1]
-                groups_timestep[group] += days
                 normalized_date_quantities.append(days/float(quantity))
 
+        groups_timestep[group] = (last_day_store - transaction_table[group][-1][0]).days
         tommy[group] = normalized_date_quantities
-        prob = give_probability(group, day_timestep, 1)
+        prob = give_probability(group, groups_timestep[group], 0)
         rankings.append(ProductGroup(prob, group, lookup(group)))
 
     rankings.sort(reverse=True, key=lambda x: x.prob)
@@ -105,6 +107,6 @@ def get_rankings(day_timestep, quantities):
     returns a descending ranked list of products (namedtuple instances in the following format)
     [product(prob, group_id, group_name), ....]
     """
-    rankings = [ProductGroup(give_probability(group, day_timestep, quantities.get(group, 0)), group, lookup(group)) for group in tommy]
+    rankings = [ProductGroup(give_probability(group, groups_timestep[group], quantities.get(group, 0)), group, lookup(group)) for group in tommy]
     rankings.sort(reverse=True)
     return rankings

@@ -45,10 +45,10 @@ var twoToThreeTransition = function(dom, e) {
     $("#loading").animate({"opacity": 100});
     
     var payload = {purchased_items: {}};
-    payload.time_step_since_last_purchase = $(thisDom).find(".time-step-input").val()
+    payload.time_step_since_last_purchase = parseInt($(thisDom).find(".time-step-input").val());
     
-    $(thisDom).find(".todo-done").each(function() {
-        payload.purchased_items[$(this).data("group_id")] = $(this).find(".quantity_input").val()
+    $(".rec-list-wrapper").last().find(".todo-done").each(function() {
+        payload.purchased_items[$(this).data("group_id")] = parseInt($(this).find(".quantity_input").val());
     });
     console.log(payload)
     update(JSON.stringify(payload));
