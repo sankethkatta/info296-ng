@@ -12,7 +12,7 @@
                     {% if loop.index <= 50 %}
                         <li class="recommendation-item" data-group_id="{{ item.group_id }}">
                             <div class="todo-content">
-                                <h4 class="todo-name"><strong>{{ loop.index }}: {{ item.group_name }}</strong> prob={{ item.prob }}</h4>
+                                <h4 class="todo-name"><strong>{{ loop.index }}: {{ item.group_name }}</strong> prob={{ '%0.2f' % item.prob|float }}</h4>
                                 <div class="quantity">
                                     <span class="subadd-wrapper"><span class="sub">-</span></span>
                                     <input class="quantity_input" type="text" name="quantity" value="0">
