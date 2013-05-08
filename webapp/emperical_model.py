@@ -43,11 +43,13 @@ def give_probability(group, day, quantity):
     
     #summing the probabilities
     for key,val in rounded.iteritems():
-        if key>day:
+        if key>(day/float(quantity + 1)):
+            #print "break at: day=%s t/q=%s" % (day, (day/float(1 + quantity)))
+            #print "distsum=%s" % distsum
             break   
         distsum = distsum + val
     #print "numerator: %s, denominator: %s" % (distsum, float(quantity + 1))
-    return distsum / float(quantity + 1)
+    return distsum
 
 def update_rankings(group, time, quantity, purchased=False):
     """
@@ -93,7 +95,12 @@ def init_rankings(day_timestep):
                 quantity = transaction_table[group][i-1][1]
                 normalized_date_quantities.append(days/float(quantity))
 
-        groups_timestep[group] = (last_day_store - transaction_table[group][-1][0]).days
+        THRESHOLD = 20
+        days_since_last_purchase = (last_day_store - transaction_table[group][-1][0]).days 
+        if days_since_last_purchase > THRESHOLD:
+            groups_timestep[group] = 0
+        else:
+            groups_timestep[group] = days_since_last_purchase
         tommy[group] = normalized_date_quantities
         prob = give_probability(group, groups_timestep[group], transaction_table[group][-1][1])
         rankings.append(ProductGroup(prob, group, lookup(group)))
