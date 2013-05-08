@@ -95,7 +95,7 @@ def init_rankings(day_timestep):
 
         groups_timestep[group] = (last_day_store - transaction_table[group][-1][0]).days
         tommy[group] = normalized_date_quantities
-        prob = give_probability(group, groups_timestep[group], 0)
+        prob = give_probability(group, groups_timestep[group], transaction_table[group][-1][1])
         rankings.append(ProductGroup(prob, group, lookup(group)))
 
     rankings.sort(reverse=True, key=lambda x: x.prob)
